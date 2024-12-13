@@ -63,6 +63,10 @@ export default tseslint.config(
       ],
       '@typescript-eslint/default-param-last': 'error',
       '@typescript-eslint/method-signature-style': 'error',
+      '@typescript-eslint/no-floating-promises': [
+        'error',
+        { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['suite', 'test'] }] }
+      ],
       '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/no-loop-func': 'error',
       '@typescript-eslint/no-non-null-assertion': 'off',
