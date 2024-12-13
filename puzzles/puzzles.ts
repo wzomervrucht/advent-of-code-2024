@@ -1,3 +1,3 @@
-import type { Puzzle } from './puzzle.ts';
+import { historianHysteria } from './01/solution.ts';
 
-export const puzzles: Puzzle[] = [];
+export const puzzles = [historianHysteria];
