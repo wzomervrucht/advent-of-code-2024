@@ -64,6 +64,7 @@ export default tseslint.config(
       '@typescript-eslint/default-param-last': 'error',
       '@typescript-eslint/method-signature-style': 'error',
       '@typescript-eslint/no-confusing-non-null-assertion': 'off',
+      '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
       '@typescript-eslint/no-floating-promises': [
         'error',
         { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['suite', 'test'] }] }
