@@ -5,8 +5,8 @@ import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
   const lines = input.map(parseLine);
-  const left = lines.map(line => line.left).sort((x, y) => y - x);
-  const right = lines.map(line => line.right).sort((x, y) => y - x);
+  const left = lines.map(line => line.left).sort((x, y) => x - y);
+  const right = lines.map(line => line.right).sort((x, y) => x - y);
   const distances = lines.map((_, i) => Math.abs(left[i]! - right[i]!));
   return sum(distances);
 }
