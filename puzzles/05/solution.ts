@@ -25,7 +25,7 @@ function parseInput(input: string[]) {
   };
 }
 
-function parseRule(line: string): Rule {
+function parseRule(line: string): [number, number] {
   const match = line.match(/^(?<x>\d+)\|(?<y>\d+)$/);
   assert(match);
   const groups = match.groups as { x: string; y: string };
@@ -37,7 +37,7 @@ function parseUpdate(line: string) {
   return parseIntegers(line);
 }
 
-function isOrdered(update: number[], rules: Rule[]) {
+function isOrdered(update: number[], rules: [number, number][]) {
   return rules.every(([x, y]) => {
     const i = update.indexOf(x);
     const j = update.indexOf(y);
@@ -45,12 +45,12 @@ function isOrdered(update: number[], rules: Rule[]) {
   });
 }
 
-function order(update: number[], rules: Rule[]) {
+function order(update: number[], rules: [number, number][]) {
   update.sort((p, q) => compare(p, q, rules));
   assert(isOrdered(update, rules));
 }
 
-function compare(p: number, q: number, rules: Rule[]) {
+function compare(p: number, q: number, rules: [number, number][]) {
   return rules.some(([x, y]) => x === p && y === q) ? -1 : 1;
 }
 
@@ -58,8 +58,6 @@ function getMiddlePage(update: number[]) {
   assert(update.length % 2 === 1);
   return update[(update.length - 1) / 2]!;
 }
-
-type Rule = [number, number];
 
 export const printQueue: Puzzle = {
   day: 5,
