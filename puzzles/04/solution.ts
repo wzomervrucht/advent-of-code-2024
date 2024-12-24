@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import path from 'node:path';
+import { join } from 'node:path';
 import { array } from '../common/arrays.ts';
 import type { Puzzle } from '../puzzle.ts';
 
@@ -49,7 +49,7 @@ function getSize(input: string[]) {
 export const ceresSearch: Puzzle = {
   day: 4,
   title: 'Ceres Search',
-  input: path.join(import.meta.dirname, 'input.txt'),
+  input: join(import.meta.dirname, 'input.txt'),
   solve1,
   solve2,
   answer1: 2370,

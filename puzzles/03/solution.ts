@@ -1,4 +1,4 @@
-import path from 'node:path';
+import { join } from 'node:path';
 import { sum } from '../common/numbers.ts';
 import type { Puzzle } from '../puzzle.ts';
 
@@ -43,7 +43,7 @@ function getInstructions(line: string) {
 export const mullItOver: Puzzle = {
   day: 3,
   title: 'Mull It Over',
-  input: path.join(import.meta.dirname, 'input.txt'),
+  input: join(import.meta.dirname, 'input.txt'),
   solve1,
   solve2,
   answer1: 188192787,

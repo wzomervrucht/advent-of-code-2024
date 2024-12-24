@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import path from 'node:path';
+import { join } from 'node:path';
 import { sum } from '../common/numbers.ts';
 import type { Puzzle } from '../puzzle.ts';
 
@@ -29,7 +29,7 @@ function parseLine(line: string) {
 export const historianHysteria: Puzzle = {
   day: 1,
   title: 'Historian Hysteria',
-  input: path.join(import.meta.dirname, 'input.txt'),
+  input: join(import.meta.dirname, 'input.txt'),
   solve1,
   solve2,
   answer1: 1722302,

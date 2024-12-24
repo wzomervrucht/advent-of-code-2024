@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import path from 'node:path';
+import { join } from 'node:path';
 import { range } from '../common/arrays.ts';
 import { parseIntegers } from '../common/numbers.ts';
 import type { Puzzle } from '../puzzle.ts';
@@ -29,7 +29,7 @@ function isSafe(report: number[]) {
 export const redNosedReports: Puzzle = {
   day: 2,
   title: 'Red-Nosed Reports',
-  input: path.join(import.meta.dirname, 'input.txt'),
+  input: join(import.meta.dirname, 'input.txt'),
   solve1,
   solve2,
   answer1: 306,

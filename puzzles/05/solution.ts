@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import path from 'node:path';
+import { join } from 'node:path';
 import { parseIntegers, sum } from '../common/numbers.ts';
 import type { Puzzle } from '../puzzle.ts';
 
@@ -62,7 +62,7 @@ function getMiddlePage(update: number[]) {
 export const printQueue: Puzzle = {
   day: 5,
   title: 'Print Queue',
-  input: path.join(import.meta.dirname, 'input.txt'),
+  input: join(import.meta.dirname, 'input.txt'),
   solve1,
   solve2,
   answer1: 4637,
