@@ -57,11 +57,13 @@ export default tseslint.config(
       'prefer-regex-literals': 'error',
       'prefer-template': 'error',
       'require-atomic-updates': 'error',
+      '@typescript-eslint/class-methods-use-this': 'error',
       '@typescript-eslint/consistent-type-assertions': [
         'error',
         { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' }
       ],
       '@typescript-eslint/default-param-last': 'error',
+      '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
       '@typescript-eslint/method-signature-style': 'error',
       '@typescript-eslint/no-confusing-non-null-assertion': 'off',
       '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
@@ -79,6 +81,7 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-unnecessary-condition': ['error', { checkTypePredicates: true }],
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+      '@typescript-eslint/parameter-properties': 'error',
       '@typescript-eslint/prefer-regexp-exec': 'off',
       '@typescript-eslint/promise-function-async': 'error',
       '@typescript-eslint/require-array-sort-compare': 'error',
