@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { sum } from '../common/numbers.ts';
+import { sum } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {

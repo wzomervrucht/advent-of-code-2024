@@ -1,7 +1,6 @@
-import assert from 'node:assert/strict';
 import { join } from 'node:path';
-import { range } from '../common/arrays.ts';
-import { parseIntegers } from '../common/numbers.ts';
+import { assert } from '../common/assert.ts';
+import { parseIntegers, range } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
