@@ -57,7 +57,6 @@ export default tseslint.config(
       'prefer-regex-literals': 'error',
       'prefer-template': 'error',
       'require-atomic-updates': 'error',
-      '@typescript-eslint/class-methods-use-this': 'error',
       '@typescript-eslint/consistent-type-assertions': [
         'error',
         { assertionStyle: 'as', objectLiteralTypeAssertions: 'never' }
