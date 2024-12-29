@@ -11,6 +11,14 @@ export function parseIntegers(string: string) {
   return matches.map(m => parseInt(m));
 }
 
+export function add(x: number, y: number) {
+  return x + y;
+}
+
+export function multiply(x: number, y: number) {
+  return x * y;
+}
+
 export function sum(values: number[]) {
-  return values.reduce((x, y) => x + y, 0);
+  return values.reduce(add, 0);
 }
