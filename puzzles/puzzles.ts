@@ -5,6 +5,7 @@ import { ceresSearch } from './04/solution.ts';
 import { printQueue } from './05/solution.ts';
 import { guardGallivant } from './06/solution.ts';
 import { bridgeRepair } from './07/solution.ts';
+import { resonantCollinearity } from './08/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -13,5 +14,6 @@ export const puzzles = [
   ceresSearch,
   printQueue,
   guardGallivant,
-  bridgeRepair
+  bridgeRepair,
+  resonantCollinearity
 ];

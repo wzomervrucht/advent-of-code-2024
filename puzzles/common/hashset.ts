@@ -7,6 +7,10 @@ export abstract class HashSet<T> {
     this.set = new Set(this.hashMap(values ?? []));
   }
 
+  get size() {
+    return this.set.size;
+  }
+
   has(value: T) {
     return this.set.has(this.hash(value));
   }
