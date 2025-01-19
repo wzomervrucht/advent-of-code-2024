@@ -40,6 +40,7 @@ function solve2(input: string[]) {
 
 function parseDiskMap(input: string[]) {
   assert(input.length === 1);
+  assert(input[0]!.match(/^\d*$/));
   const map = [...input[0]!].map(d => parseInt(d));
   const files: { start: number; size: number }[] = [];
   const gaps: { start: number; size: number }[] = [];
