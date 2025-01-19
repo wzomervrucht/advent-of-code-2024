@@ -22,6 +22,14 @@ export class Grid<T> {
     this.grid[x]![y] = value;
   }
 
+  forEach(callback: (value: T, point: Point) => void) {
+    for (let x = 0; x < this.size.x; x++) {
+      for (let y = 0; y < this.size.y; y++) {
+        callback(this.grid[x]![y] as T, { x, y });
+      }
+    }
+  }
+
   static from(lines: string[]) {
     const size = {
       x: lines.length,

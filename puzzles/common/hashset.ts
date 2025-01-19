@@ -26,6 +26,12 @@ export abstract class HashSet<T> {
       yield this.hash(value);
     }
   }
+
+  static union<T, H extends HashSet<T>>(this: new () => H, sets: H[]) {
+    const result = new this();
+    result.set = new Set(sets.flatMap(set => [...set.set]));
+    return result;
+  }
 }
 
 export class PointSet extends HashSet<Point> {
