@@ -30,6 +30,10 @@ export class Grid<T> {
     }
   }
 
+  map<U>(callback: (value: T, point: Point) => U) {
+    return new Grid(this.size, (x, y) => callback(this.grid[x]![y] as T, { x, y }));
+  }
+
   static from(lines: string[]) {
     const size = {
       x: lines.length,

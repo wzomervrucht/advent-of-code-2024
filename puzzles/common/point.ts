@@ -3,7 +3,9 @@ export interface Point {
   y: number;
 }
 
-export type Direction = '^' | '<' | 'v' | '>';
+export const directions = ['^', '<', 'v', '>'] as const;
+
+export type Direction = (typeof directions)[number];
 
 export interface Position extends Point {
   direction: Direction;
@@ -30,8 +32,6 @@ const offset: Record<Direction, Point> = {
   '>': { x: 0, y: 1 }
 };
 
-const offsets = Object.values(offset);
-
 export function turnLeft({ x, y, direction }: Position) {
   return { x, y, direction: left[direction] };
 }
@@ -46,5 +46,5 @@ export function forward({ x, y, direction }: Position) {
 }
 
 export function neighbors({ x, y }: Point) {
-  return offsets.map(d => ({ x: x + d.x, y: y + d.y }));
+  return directions.map(direction => forward({ x, y, direction }));
 }
