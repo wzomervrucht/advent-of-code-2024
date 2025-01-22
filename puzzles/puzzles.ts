@@ -10,6 +10,7 @@ import { diskFragmenter } from './09/solution.ts';
 import { hoofIt } from './10/solution.ts';
 import { plutonianPebbles } from './11/solution.ts';
 import { gardenGroups } from './12/solution.ts';
+import { clawContraption } from './13/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -23,5 +24,6 @@ export const puzzles = [
   diskFragmenter,
   hoofIt,
   plutonianPebbles,
-  gardenGroups
+  gardenGroups,
+  clawContraption
 ];
