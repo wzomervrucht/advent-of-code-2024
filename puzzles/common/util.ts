@@ -27,6 +27,14 @@ export function multiply(x: number, y: number) {
   return x * y;
 }
 
+export function mod(x: number, modulus: number) {
+  return ((x % modulus) + modulus) % modulus;
+}
+
 export function sum(values: number[]) {
   return values.reduce(add, 0);
+}
+
+export function argmax(values: number[]) {
+  return values.reduce((i, value, index) => (i === -1 || value > values[i]! ? index : i), -1);
 }
