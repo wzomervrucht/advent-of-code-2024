@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { assert } from '../common/assert.ts';
+import { assert, assume } from '../common/assert.ts';
 import { parseIntegers, sum } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
@@ -51,7 +51,10 @@ function order(update: number[], rules: [number, number][]) {
 }
 
 function compare(p: number, q: number, rules: [number, number][]) {
-  return rules.some(([x, y]) => x === p && y === q) ? -1 : 1;
+  const lt = rules.some(([x, y]) => x === p && y === q);
+  const gt = rules.some(([x, y]) => x === q && y === p);
+  assume(lt || gt, 'Ordering rules are not totally ordered');
+  return lt ? -1 : 1;
 }
 
 function getMiddlePage(update: number[]) {
