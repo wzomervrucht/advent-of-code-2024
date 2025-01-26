@@ -48,7 +48,7 @@ function getTokens({ a, b, prize }: Machine) {
     }
     return 0;
   }
-  if (a.x * prize.y !== a.y * prize.x) {
+  if (a.x * prize.y !== a.y * prize.x || b.x * prize.y !== b.y * prize.x) {
     return 0;
   }
   assume.fail('Button A, Button B and Prize are collinear');
