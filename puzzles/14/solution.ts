@@ -9,6 +9,7 @@ import type { Puzzle } from '../puzzle.ts';
 function solve1(input: string[], config?: SizeConfig) {
   const robots = input.map(parseRobot);
   const size = config?.size ?? { x: 101, y: 103 };
+  robots.forEach(({ p }) => assert(p.x < size.x && p.y < size.y));
   moveRobots(robots, size, 100);
   return getSafetyFactor(robots, size);
 }
@@ -16,6 +17,7 @@ function solve1(input: string[], config?: SizeConfig) {
 function solve2(input: string[]) {
   const robots = input.map(parseRobot);
   const size = { x: 101, y: 103 };
+  robots.forEach(({ p }) => assert(p.x < size.x && p.y < size.y));
   const r = { x: 51, y: -50 }; // 51 * 101 - 50 * 103 = 1
   const t = getMaxTimes(robots, size);
   const time = mod(t.y * r.x * size.x + t.x * r.y * size.y, size.x * size.y);
