@@ -71,7 +71,6 @@ export default tseslint.config(
         { allowForKnownSafeCalls: [{ from: 'package', package: 'node:test', name: ['suite', 'test'] }] }
       ],
       '@typescript-eslint/no-import-type-side-effects': 'error',
-      '@typescript-eslint/no-loop-func': 'error',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-shadow': ['error', { hoist: 'all' }],
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': [
