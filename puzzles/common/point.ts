@@ -25,6 +25,13 @@ const right: Record<Direction, Direction> = {
   '>': 'v'
 };
 
+const opposite: Record<Direction, Direction> = {
+  '^': 'v',
+  '<': '>',
+  'v': '^',
+  '>': '<'
+};
+
 const offset: Record<Direction, Point> = {
   '^': { x: -1, y: 0 },
   '<': { x: 0, y: -1 },
@@ -38,6 +45,10 @@ export function turnLeft({ x, y, direction }: Position) {
 
 export function turnRight({ x, y, direction }: Position) {
   return { x, y, direction: right[direction] };
+}
+
+export function turnBack({ x, y, direction }: Position) {
+  return { x, y, direction: opposite[direction] };
 }
 
 export function forward({ x, y, direction }: Position) {

@@ -13,6 +13,7 @@ import { gardenGroups } from './12/solution.ts';
 import { clawContraption } from './13/solution.ts';
 import { restroomRedoubt } from './14/solution.ts';
 import { warehouseWoes } from './15/solution.ts';
+import { reindeerMaze } from './16/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -29,5 +30,6 @@ export const puzzles = [
   gardenGroups,
   clawContraption,
   restroomRedoubt,
-  warehouseWoes
+  warehouseWoes,
+  reindeerMaze
 ];
