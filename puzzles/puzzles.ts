@@ -14,6 +14,7 @@ import { clawContraption } from './13/solution.ts';
 import { restroomRedoubt } from './14/solution.ts';
 import { warehouseWoes } from './15/solution.ts';
 import { reindeerMaze } from './16/solution.ts';
+import { chronospatialComputer } from './17/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -31,5 +32,6 @@ export const puzzles = [
   clawContraption,
   restroomRedoubt,
   warehouseWoes,
-  reindeerMaze
+  reindeerMaze,
+  chronospatialComputer
 ];

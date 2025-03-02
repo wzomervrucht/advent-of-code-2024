@@ -31,6 +31,11 @@ export function mod(x: number, modulus: number) {
   return ((x % modulus) + modulus) % modulus;
 }
 
+export function xor(x: number, y: number) {
+  // eslint-disable-next-line no-bitwise
+  return Number(BigInt(x) ^ BigInt(y));
+}
+
 export function sum(values: number[]) {
   return values.reduce(add, 0);
 }
