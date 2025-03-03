@@ -16,6 +16,7 @@ import { warehouseWoes } from './15/solution.ts';
 import { reindeerMaze } from './16/solution.ts';
 import { chronospatialComputer } from './17/solution.ts';
 import { ramRun } from './18/solution.ts';
+import { linenLayout } from './19/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -35,5 +36,6 @@ export const puzzles = [
   warehouseWoes,
   reindeerMaze,
   chronospatialComputer,
-  ramRun
+  ramRun,
+  linenLayout
 ];
