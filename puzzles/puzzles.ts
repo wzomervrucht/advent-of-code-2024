@@ -15,6 +15,7 @@ import { restroomRedoubt } from './14/solution.ts';
 import { warehouseWoes } from './15/solution.ts';
 import { reindeerMaze } from './16/solution.ts';
 import { chronospatialComputer } from './17/solution.ts';
+import { ramRun } from './18/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -33,5 +34,6 @@ export const puzzles = [
   restroomRedoubt,
   warehouseWoes,
   reindeerMaze,
-  chronospatialComputer
+  chronospatialComputer,
+  ramRun
 ];
