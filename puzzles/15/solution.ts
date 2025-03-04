@@ -27,7 +27,7 @@ function solve2(input: string[]) {
 
 function parseInput(input: string[], expand = false) {
   const blank = input.indexOf('');
-  assert(blank > 0);
+  assert(blank >= 0);
   return {
     map: getGrid(input.slice(0, blank), expand),
     robot: getRobot(input.slice(0, blank), expand),
@@ -38,7 +38,7 @@ function parseInput(input: string[], expand = false) {
 function getGrid(lines: string[], expand: boolean) {
   assert(lines.every(line => line.length === lines[0]!.length));
   assert(lines.every(line => line.startsWith('#') && line.endsWith('#')));
-  assert(lines[0]!.match(/^#+$/) && lines.at(-1)!.match(/^#+$/));
+  assert(lines[0]?.match(/^#+$/) && lines.at(-1)?.match(/^#+$/));
   return Grid.from(expand ? expandMap(lines) : lines);
 }
 

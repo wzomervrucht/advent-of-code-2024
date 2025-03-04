@@ -52,7 +52,7 @@ function solve2(input: string[]) {
 function getGrid(input: string[]) {
   assert(input.every(line => line.length === input[0]!.length));
   assert(input.every(line => line.startsWith('#') && line.endsWith('#')));
-  assert(input[0]!.match(/^#+$/) && input.at(-1)!.match(/^#+$/));
+  assert(input[0]?.match(/^#+$/) && input.at(-1)?.match(/^#+$/));
   return Grid.from(input);
 }
 
