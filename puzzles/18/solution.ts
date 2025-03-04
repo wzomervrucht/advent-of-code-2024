@@ -37,7 +37,10 @@ function parseByte(line: string) {
 
 function getSetup(size: number, bytes: Point[]) {
   const grid = new Grid({ x: size + 1, y: size + 1 }, () => Infinity);
-  bytes.forEach((p, n) => grid.set(p, n + 1));
+  bytes.forEach((p, n) => {
+    assert(grid.has(p));
+    grid.set(p, n + 1);
+  });
   return {
     grid,
     start: { x: 0, y: 0 },
