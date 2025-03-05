@@ -1,7 +1,7 @@
 import type { Point, Position } from './point.ts';
 
 export abstract class HashMap<T, U> {
-  private map: Map<string, U>;
+  private readonly map: Map<string, U>;
 
   constructor(entries?: Iterable<[T, U]>) {
     this.map = new Map(this.hashMap(entries ?? []));

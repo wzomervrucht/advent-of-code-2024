@@ -1,6 +1,6 @@
 export class Queue<T> {
-  private items: T[] = [];
-  private compare: (a: T, b: T) => number;
+  private readonly items: T[] = [];
+  private readonly compare: (a: T, b: T) => number;
 
   constructor(compare: (a: T, b: T) => number, items: Iterable<T> = []) {
     this.compare = compare;

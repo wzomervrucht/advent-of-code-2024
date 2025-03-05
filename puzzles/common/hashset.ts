@@ -1,7 +1,7 @@
 import type { Point, Position } from './point.ts';
 
 export abstract class HashSet<T> {
-  private set: Set<string>;
+  private readonly set: Set<string>;
 
   constructor(values?: Iterable<T>) {
     this.set = new Set(this.hashMap(values ?? []));
