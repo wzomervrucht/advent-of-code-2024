@@ -6,7 +6,7 @@ import type { Point } from '../common/point.ts';
 import { argmax, array, mod, range } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
-function solve1(input: string[], config?: SizeConfig) {
+function solve1(input: string[], config?: RestroomRedoubtConfig) {
   const robots = input.map(parseRobot);
   const size = config?.size ?? { x: 101, y: 103 };
   robots.forEach(({ p }) => assert(p.x < size.x && p.y < size.y));
@@ -93,11 +93,11 @@ interface Robot {
   v: Point;
 }
 
-export interface SizeConfig {
+export interface RestroomRedoubtConfig {
   size: Point;
 }
 
-export const restroomRedoubt: Puzzle<SizeConfig> = {
+export const restroomRedoubt: Puzzle<RestroomRedoubtConfig> = {
   day: 14,
   title: 'Restroom Redoubt',
   input: join(import.meta.dirname, 'input.txt'),

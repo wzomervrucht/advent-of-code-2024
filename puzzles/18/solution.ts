@@ -5,7 +5,7 @@ import { PointSet } from '../common/hashset.ts';
 import { neighbors, type Point } from '../common/point.ts';
 import type { Puzzle } from '../puzzle.ts';
 
-function solve1(input: string[], config?: RamConfig) {
+function solve1(input: string[], config?: RamRunConfig) {
   const size = config?.size ?? 70;
   const count = config?.count ?? 1024;
   const bytes = input.map(parseByte);
@@ -13,7 +13,7 @@ function solve1(input: string[], config?: RamConfig) {
   return countSteps(grid, start, end, count);
 }
 
-function solve2(input: string[], config?: RamConfig) {
+function solve2(input: string[], config?: RamRunConfig) {
   const size = config?.size ?? 70;
   const bytes = input.map(parseByte);
   const { grid, start, end } = getSetup(size, bytes);
@@ -76,12 +76,12 @@ function getDistance(grid: Grid<number>, start: Point, end: Point, threshold: nu
   return Infinity;
 }
 
-export interface RamConfig {
+export interface RamRunConfig {
   size: number;
   count: number;
 }
 
-export const ramRun: Puzzle<RamConfig> = {
+export const ramRun: Puzzle<RamRunConfig> = {
   day: 18,
   title: 'RAM Run',
   input: join(import.meta.dirname, 'input.txt'),
