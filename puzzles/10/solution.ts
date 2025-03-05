@@ -9,7 +9,7 @@ import type { Puzzle } from '../puzzle.ts';
 function solve1(input: string[]) {
   const map = parseMap(input);
   const trailheads = getTrailheads(map);
-  const scores = trailheads.map(p => getEndpoints(map, p).size);
+  const scores = trailheads.map(p => getScore(map, p));
   return sum(scores);
 }
 
@@ -36,14 +36,17 @@ function getTrailheads(map: Grid<Square>) {
   return trailheads;
 }
 
-function getEndpoints(map: Grid<Square>, p: Point): PointSet {
+function getScore(map: Grid<Square>, p: Point) {
+  return new PointSet(getEndpoints(map, p)).size;
+}
+
+function getEndpoints(map: Grid<Square>, p: Point): Point[] {
   const square = map.get(p)!;
   if (!square.endpoints) {
     if (square.height === 9) {
-      square.endpoints = new PointSet([p]);
+      square.endpoints = [p];
     } else {
-      const endpoints = getNext(map, p).map(q => getEndpoints(map, q));
-      square.endpoints = PointSet.union(endpoints);
+      square.endpoints = getNext(map, p).flatMap(q => getEndpoints(map, q));
     }
   }
   return square.endpoints;
@@ -68,7 +71,7 @@ function getNext(map: Grid<Square>, p: Point) {
 
 interface Square {
   height: number;
-  endpoints?: PointSet;
+  endpoints?: Point[];
   rating?: number;
 }
 
