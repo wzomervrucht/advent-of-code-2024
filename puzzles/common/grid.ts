@@ -2,7 +2,7 @@ import type { Point } from './point.ts';
 import { array } from './util.ts';
 
 export class Grid<T> {
-  private readonly size: Point;
+  readonly size: Point;
   private readonly grid: T[][];
 
   constructor(size: Point, callback: (x: number, y: number) => T) {

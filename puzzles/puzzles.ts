@@ -17,6 +17,7 @@ import { reindeerMaze } from './16/solution.ts';
 import { chronospatialComputer } from './17/solution.ts';
 import { ramRun } from './18/solution.ts';
 import { linenLayout } from './19/solution.ts';
+import { raceCondition } from './20/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -37,5 +38,6 @@ export const puzzles = [
   reindeerMaze,
   chronospatialComputer,
   ramRun,
-  linenLayout
+  linenLayout,
+  raceCondition
 ];
