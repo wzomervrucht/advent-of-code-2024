@@ -19,6 +19,10 @@ export abstract class HashMap<T, U> {
     this.map.set(this.hash(key), value);
   }
 
+  values() {
+    return this.map.values();
+  }
+
   protected abstract hash(value: T): string;
 
   private *hashMap(entries: Iterable<[T, U]>) {
