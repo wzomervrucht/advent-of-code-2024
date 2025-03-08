@@ -18,6 +18,7 @@ import { chronospatialComputer } from './17/solution.ts';
 import { ramRun } from './18/solution.ts';
 import { linenLayout } from './19/solution.ts';
 import { raceCondition } from './20/solution.ts';
+import { keypadConundrum } from './21/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -39,5 +40,6 @@ export const puzzles = [
   chronospatialComputer,
   ramRun,
   linenLayout,
-  raceCondition
+  raceCondition,
+  keypadConundrum
 ];
