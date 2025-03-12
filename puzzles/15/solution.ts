@@ -9,7 +9,7 @@ function solve1(input: string[]) {
   const { map, robot, moves } = parseInput(input);
   let position = robot;
   for (const direction of moves) {
-    position = move(map, position, direction as Direction);
+    position = move(map, position, direction);
   }
   const boxes = getBoxes(map);
   return sum(boxes.map(getCoordinate));
@@ -19,7 +19,7 @@ function solve2(input: string[]) {
   const { map, robot, moves } = parseInput(input, true);
   let position = robot;
   for (const direction of moves) {
-    position = move(map, position, direction as Direction);
+    position = move(map, position, direction);
   }
   const boxes = getBoxes(map);
   return sum(boxes.map(getCoordinate));
@@ -59,7 +59,7 @@ function getRobot(lines: string[], expand: boolean) {
 
 function getMoves(lines: string[]) {
   assert(lines.every(line => line.match(/^[>v<^]*$/)));
-  return lines.join('');
+  return lines.join('') as Iterable<Direction>;
 }
 
 function move(map: Grid<string>, robot: Point, direction: Direction) {
