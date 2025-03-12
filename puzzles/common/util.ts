@@ -40,6 +40,10 @@ export function sum(values: number[]) {
   return values.reduce(add, 0);
 }
 
+export function max<T>(values: T[], callback: (value: T) => number) {
+  return values.length ? values.reduce((m, value) => (callback(value) > callback(m) ? value : m)) : undefined;
+}
+
 export function argmax(values: number[]) {
-  return values.reduce((i, value, index) => (i === -1 || value > values[i]! ? index : i), -1);
+  return max(range(values.length), i => values[i]!) ?? -1;
 }
