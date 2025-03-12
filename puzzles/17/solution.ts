@@ -35,6 +35,9 @@ function parseInput(input: string[]) {
 }
 
 function verifyAssumptions(program: Octal[]) {
+  // these assumptions imply that the program runs in loops, such that there is
+  // one loop for each octal digit of A, each loop prints a single number, and
+  // that number depends only on the value of register A at the start of the loop
   const instructions = array(program.length / 2, i => ({
     opcode: program[2 * i]!,
     operand: program[2 * i + 1]!

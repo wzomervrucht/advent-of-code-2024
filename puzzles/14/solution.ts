@@ -58,6 +58,9 @@ function getSafetyFactor(robots: Robot[], size: Point) {
 }
 
 function getMaxTimes(robots: Robot[], size: Point) {
+  // the x and y positions of the robots repeat every size.x and size.y seconds,
+  // and the Easter egg has many robots concentrated in a few columns and rows,
+  // so we find the times with the most robots in a single column or row.
   const n = Math.max(size.x, size.y);
   const max: Point[] = [];
   for (let i = 0; i < n; i++) {
