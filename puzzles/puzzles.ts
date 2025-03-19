@@ -21,6 +21,7 @@ import { raceCondition } from './20/solution.ts';
 import { keypadConundrum } from './21/solution.ts';
 import { monkeyMarket } from './22/solution.ts';
 import { lanParty } from './23/solution.ts';
+import { crossedWires } from './24/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -45,5 +46,6 @@ export const puzzles = [
   raceCondition,
   keypadConundrum,
   monkeyMarket,
-  lanParty
+  lanParty,
+  crossedWires
 ];
