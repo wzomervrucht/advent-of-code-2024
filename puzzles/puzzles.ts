@@ -22,6 +22,7 @@ import { keypadConundrum } from './21/solution.ts';
 import { monkeyMarket } from './22/solution.ts';
 import { lanParty } from './23/solution.ts';
 import { crossedWires } from './24/solution.ts';
+import { codeChronicle } from './25/solution.ts';
 
 export const puzzles = [
   historianHysteria,
@@ -47,5 +48,6 @@ export const puzzles = [
   keypadConundrum,
   monkeyMarket,
   lanParty,
-  crossedWires
+  crossedWires,
+  codeChronicle
 ];
