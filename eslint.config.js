@@ -80,6 +80,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unnecessary-condition': ['error', { checkTypePredicates: true }],
       '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
       '@typescript-eslint/parameter-properties': 'error',
+      '@typescript-eslint/prefer-nullish-coalescing': ['error', { ignorePrimitives: true }],
       '@typescript-eslint/prefer-regexp-exec': 'off',
       '@typescript-eslint/promise-function-async': 'error',
       '@typescript-eslint/require-array-sort-compare': 'error',

@@ -37,7 +37,10 @@ function parsePart(part?: string) {
 }
 
 export async function runAll() {
+  let skipLine = false;
   for (const puzzle of puzzles) {
+    skipLine && console.log('');
+    skipLine = true;
     // eslint-disable-next-line no-await-in-loop
     await runPuzzle(puzzle);
   }
@@ -54,7 +57,7 @@ function getPuzzle(day: number) {
 }
 
 async function runPuzzle(puzzle: Puzzle, part?: 1 | 2, input?: string) {
-  const lines = await getInput(input ?? puzzle.input);
+  const lines = await getInput(input || puzzle.input);
   if (part) {
     const solve = part === 1 ? puzzle.solve1 : puzzle.solve2;
     console.log(solve(lines));
