@@ -105,7 +105,5 @@ export const restroomRedoubt: Puzzle<RestroomRedoubtConfig> = {
   title: 'Restroom Redoubt',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 230435667,
-  answer2: 7709
+  solve2
 };

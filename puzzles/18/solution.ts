@@ -86,7 +86,5 @@ export const ramRun: Puzzle<RamRunConfig> = {
   title: 'RAM Run',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 310,
-  answer2: '16,46'
+  solve2
 };

@@ -67,7 +67,5 @@ export const printQueue: Puzzle = {
   title: 'Print Queue',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 4637,
-  answer2: 6370
+  solve2
 };

@@ -63,7 +63,5 @@ export const plutonianPebbles: Puzzle = {
   title: 'Plutonian Pebbles',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 187738,
-  answer2: 223767210249237
+  solve2
 };

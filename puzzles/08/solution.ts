@@ -81,7 +81,5 @@ export const resonantCollinearity: Puzzle = {
   title: 'Resonant Collinearity',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 293,
-  answer2: 934
+  solve2
 };

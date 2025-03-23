@@ -91,7 +91,5 @@ export const raceCondition: Puzzle<RaceConditionConfig> = {
   title: 'Race Condition',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1321,
-  answer2: 971737
+  solve2
 };

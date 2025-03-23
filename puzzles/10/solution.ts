@@ -80,7 +80,5 @@ export const hoofIt: Puzzle = {
   title: 'Hoof It',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 566,
-  answer2: 1324
+  solve2
 };

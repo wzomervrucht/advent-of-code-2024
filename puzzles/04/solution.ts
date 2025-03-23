@@ -51,7 +51,5 @@ export const ceresSearch: Puzzle = {
   title: 'Ceres Search',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 2370,
-  answer2: 1908
+  solve2
 };

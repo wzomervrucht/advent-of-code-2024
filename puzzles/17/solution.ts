@@ -150,7 +150,5 @@ export const chronospatialComputer: Puzzle = {
   title: 'Chronospatial Computer',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: '1,6,3,6,5,6,5,1,7',
-  answer2: 247839653009594
+  solve2
 };

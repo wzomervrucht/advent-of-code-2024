@@ -79,7 +79,5 @@ export const lanParty: Puzzle = {
   title: 'LAN Party',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1512,
-  answer2: 'ac,ed,fh,kd,lf,mb,om,pe,qt,uo,uy,vr,wg'
+  solve2
 };

@@ -31,7 +31,5 @@ export const historianHysteria: Puzzle = {
   title: 'Historian Hysteria',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1722302,
-  answer2: 20373490
+  solve2
 };

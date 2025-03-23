@@ -149,7 +149,5 @@ export const crossedWires: Puzzle = {
   title: 'Crossed Wires',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 36902370467952,
-  answer2: 'cvp,mkk,qbw,wcb,wjb,z10,z14,z34'
+  solve2
 };

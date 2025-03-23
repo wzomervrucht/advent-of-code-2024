@@ -77,7 +77,5 @@ export const guardGallivant: Puzzle = {
   title: 'Guard Gallivant',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 4665,
-  answer2: 1688
+  solve2
 };

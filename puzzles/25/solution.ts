@@ -57,7 +57,5 @@ export const codeChronicle: Puzzle = {
   title: 'Code Chronicle',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 3301,
-  answer2: 'Deliver the Chronicle'
+  solve2
 };

@@ -62,7 +62,5 @@ export const diskFragmenter: Puzzle = {
   title: 'Disk Fragmenter',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 6279058075753,
-  answer2: 6301361958738
+  solve2
 };

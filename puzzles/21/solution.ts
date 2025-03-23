@@ -165,7 +165,5 @@ export const keypadConundrum: Puzzle = {
   title: 'Keypad Conundrum',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 154208,
-  answer2: 188000493837892
+  solve2
 };

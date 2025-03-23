@@ -45,7 +45,5 @@ export const mullItOver: Puzzle = {
   title: 'Mull It Over',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 188192787,
-  answer2: 113965544
+  solve2
 };

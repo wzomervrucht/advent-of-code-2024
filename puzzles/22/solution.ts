@@ -65,7 +65,5 @@ export const monkeyMarket: Puzzle = {
   title: 'Monkey Market',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 14119253575,
-  answer2: 1600
+  solve2
 };

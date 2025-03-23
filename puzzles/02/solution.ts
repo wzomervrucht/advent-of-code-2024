@@ -30,7 +30,5 @@ export const redNosedReports: Puzzle = {
   title: 'Red-Nosed Reports',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 306,
-  answer2: 366
+  solve2
 };

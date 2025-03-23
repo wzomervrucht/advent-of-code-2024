@@ -4,6 +4,4 @@ export interface Puzzle<in TConfig = never> {
   input: string;
   solve1: (input: string[], config?: TConfig) => string | number;
   solve2: (input: string[], config?: TConfig) => string | number;
-  answer1: string | number;
-  answer2: string | number;
 }

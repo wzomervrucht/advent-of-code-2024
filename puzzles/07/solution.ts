@@ -57,7 +57,5 @@ export const bridgeRepair: Puzzle = {
   title: 'Bridge Repair',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1298103531759,
-  answer2: 140575048428831
+  solve2
 };

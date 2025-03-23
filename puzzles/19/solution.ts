@@ -45,7 +45,5 @@ export const linenLayout: Puzzle = {
   title: 'Linen Layout',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 233,
-  answer2: 691316989225259
+  solve2
 };

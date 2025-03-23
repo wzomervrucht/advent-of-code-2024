@@ -102,7 +102,5 @@ export const warehouseWoes: Puzzle = {
   title: 'Warehouse Woes',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1577255,
-  answer2: 1597035
+  solve2
 };

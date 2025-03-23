@@ -102,7 +102,5 @@ export const reindeerMaze: Puzzle = {
   title: 'Reindeer Maze',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 105496,
-  answer2: 524
+  solve2
 };

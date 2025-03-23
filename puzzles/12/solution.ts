@@ -77,7 +77,5 @@ export const gardenGroups: Puzzle = {
   title: 'Garden Groups',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 1494342,
-  answer2: 893676
+  solve2
 };

@@ -65,7 +65,5 @@ export const clawContraption: Puzzle = {
   title: 'Claw Contraption',
   input: join(import.meta.dirname, 'input.txt'),
   solve1,
-  solve2,
-  answer1: 26810,
-  answer2: 108713182988244
+  solve2
 };
