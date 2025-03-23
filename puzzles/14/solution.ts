@@ -7,33 +7,38 @@ import { argmax, array, mod, range } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[], config?: RestroomRedoubtConfig) {
-  const robots = input.map(parseRobot);
   const size = config?.size ?? { x: 101, y: 103 };
-  robots.forEach(({ p }) => assert(p.x < size.x && p.y < size.y));
+  const robots = input.map(line => parseRobot(line, size));
   moveRobots(robots, size, 100);
   return getSafetyFactor(robots, size);
 }
 
 function solve2(input: string[]) {
-  const robots = input.map(parseRobot);
   const size = { x: 101, y: 103 };
-  robots.forEach(({ p }) => assert(p.x < size.x && p.y < size.y));
-  const r = { x: 51, y: -50 }; // 51 * 101 - 50 * 103 = 1
+  const robots = input.map(line => parseRobot(line, size));
+  // the x and y positions of the robots repeat every size.x and size.y seconds,
+  // and the Easter egg has many robots concentrated in a few columns and rows,
+  // so find the times t.x, t.y with the most robots in a single column or row.
   const t = getMaxTimes(robots, size);
+  // 51 * 101 - 50 * 103 = 1
+  // solve: time = t.x mod size.x, time = t.y mod size.y
+  const r = { x: 51, y: -50 };
   const time = mod(t.y * r.x * size.x + t.x * r.y * size.y, size.x * size.y);
   moveRobots(robots, size, time);
   writeMapToFile(robots, size);
   return time;
 }
 
-function parseRobot(line: string) {
+function parseRobot(line: string, size: Point) {
   const match = line.match(/^p=(?<px>\d+),(?<py>\d+) v=(?<vx>-?\d+),(?<vy>-?\d+)$/);
   assert(match);
   const groups = match.groups as { px: string; py: string; vx: string; vy: string };
-  return {
+  const robot = {
     p: { x: parseInt(groups.px), y: parseInt(groups.py) },
     v: { x: parseInt(groups.vx), y: parseInt(groups.vy) }
   };
+  assert(robot.p.x < size.x && robot.p.y < size.y);
+  return robot;
 }
 
 function moveRobots(robots: Robot[], size: Point, time = 1) {
@@ -58,12 +63,9 @@ function getSafetyFactor(robots: Robot[], size: Point) {
 }
 
 function getMaxTimes(robots: Robot[], size: Point) {
-  // the x and y positions of the robots repeat every size.x and size.y seconds,
-  // and the Easter egg has many robots concentrated in a few columns and rows,
-  // so we find the times with the most robots in a single column or row.
   const n = Math.max(size.x, size.y);
   const max: Point[] = [];
-  for (let i = 0; i < n; i++) {
+  for (let t = 0; t < n; t++) {
     max.push(getMax(robots, size));
     moveRobots(robots, size);
   }
@@ -82,11 +84,11 @@ function getMax(robots: Robot[], size: Point) {
 }
 
 function writeMapToFile(robots: Robot[], size: Point) {
-  const map = new Grid(size, () => false);
-  robots.forEach(robot => map.set(robot.p, true));
+  const map = new Grid(size, () => ' ');
+  robots.forEach(robot => map.set(robot.p, 'X'));
   const rows = range(size.y);
   const cols = range(size.x);
-  const contents = rows.map(y => cols.map(x => (map.get({ x, y }) ? 'X' : ' ')).join('')).join('\n');
+  const contents = rows.map(y => cols.map(x => map.get({ x, y })).join('')).join('\n');
   const filename = join(import.meta.dirname, 'map.txt');
   writeFileSync(filename, contents, { encoding: 'utf8' });
 }
