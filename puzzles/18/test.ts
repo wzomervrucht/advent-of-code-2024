@@ -30,10 +30,7 @@ suite('day 18', () => {
     '1,6',
     '2,0'
   ];
-  const config = {
-    size: 6,
-    count: 12
-  };
+  const config = { size: 6, count: 12 };
 
   test('part 1', () => {
     const answer = ramRun.solve1(example, config);

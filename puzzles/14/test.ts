@@ -18,9 +18,7 @@ suite('day 14', () => {
       'p=2,4 v=2,-3',
       'p=9,5 v=-3,-3'
     ];
-    const config = {
-      size: { x: 11, y: 7 }
-    };
+    const config = { size: { x: 11, y: 7 } };
     const answer = restroomRedoubt.solve1(example, config);
     assert.equal(answer, 12);
   });
