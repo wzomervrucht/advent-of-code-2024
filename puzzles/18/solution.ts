@@ -8,14 +8,14 @@ import type { Puzzle } from '../puzzle.ts';
 function solve1(input: string[], config?: RamRunConfig) {
   const size = config?.size ?? 70;
   const count = config?.count ?? 1024;
-  const bytes = input.map(parseByte);
+  const bytes = input.map(line => parseByte(line, size));
   const { grid, start, end } = getSetup(size, bytes);
   return countSteps(grid, start, end, count);
 }
 
 function solve2(input: string[], config?: RamRunConfig) {
   const size = config?.size ?? 70;
-  const bytes = input.map(parseByte);
+  const bytes = input.map(line => parseByte(line, size));
   const { grid, start, end } = getSetup(size, bytes);
   let min = 0;
   let max = bytes.length;
@@ -24,23 +24,22 @@ function solve2(input: string[], config?: RamRunConfig) {
     const mid = Math.floor((max + min) / 2);
     [min, max] = isConnected(grid, start, end, mid) ? [mid, max] : [min, mid];
   }
-  const { x, y } = bytes[max - 1]!;
+  const { x, y } = bytes[min]!;
   return `${x},${y}`;
 }
 
-function parseByte(line: string) {
+function parseByte(line: string, size: number) {
   const match = line.match(/^(?<x>\d+),(?<y>\d+)$/);
   assert(match);
   const groups = match.groups as { x: string; y: string };
-  return { x: parseInt(groups.x), y: parseInt(groups.y) };
+  const byte = { x: parseInt(groups.x), y: parseInt(groups.y) };
+  assert(byte.x <= size && byte.y <= size);
+  return byte;
 }
 
 function getSetup(size: number, bytes: Point[]) {
   const grid = new Grid({ x: size + 1, y: size + 1 }, () => Infinity);
-  bytes.forEach((p, n) => {
-    assert(grid.has(p));
-    grid.set(p, n + 1);
-  });
+  bytes.forEach((p, n) => grid.set(p, n));
   return {
     grid,
     start: { x: 0, y: 0 },
@@ -60,20 +59,24 @@ function isConnected(grid: Grid<number>, start: Point, end: Point, threshold: nu
 
 function getDistance(grid: Grid<number>, start: Point, end: Point, threshold: number) {
   const visited = new PointSet([start]);
-  let points = [start];
+  let points = isSafe(start, grid, threshold) ? [start] : [];
   let distance = 0;
   while (points.length) {
     if (points.some(p => p.x === end.x && p.y === end.y)) {
       return distance;
     }
     points = points.flatMap(p => {
-      const next = neighbors(p).filter(q => grid.has(q) && grid.get(q)! > threshold && !visited.has(q));
+      const next = neighbors(p).filter(q => isSafe(q, grid, threshold) && !visited.has(q));
       next.forEach(q => visited.add(q));
       return next;
     });
     distance++;
   }
   return Infinity;
+}
+
+function isSafe(point: Point, grid: Grid<number>, threshold: number) {
+  return grid.has(point) && grid.get(point)! >= threshold;
 }
 
 export interface RamRunConfig {
