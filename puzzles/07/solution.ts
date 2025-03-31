@@ -22,14 +22,12 @@ function parseEquation(line: string) {
   return { value: parseInt(groups.value), numbers: parseIntegers(groups.numbers) };
 }
 
-function isSolvableV1(equation: { value: number; numbers: number[] }) {
-  const { value, numbers } = equation;
+function isSolvableV1({ value, numbers }: Equation) {
   const operators = [add, multiply];
   return isSolvable(value, numbers[0]!, numbers.slice(1), operators);
 }
 
-function isSolvableV2(equation: { value: number; numbers: number[] }) {
-  const { value, numbers } = equation;
+function isSolvableV2({ value, numbers }: Equation) {
   const operators = [add, multiply, concatenate];
   return isSolvable(value, numbers[0]!, numbers.slice(1), operators);
 }
@@ -48,6 +46,11 @@ function isSolvable(value: number, partial: number, numbers: number[], operators
 
 function concatenate(x: number, y: number) {
   return parseInt(`${x}${y}`);
+}
+
+interface Equation {
+  value: number;
+  numbers: number[];
 }
 
 type Operator = (x: number, y: number) => number;

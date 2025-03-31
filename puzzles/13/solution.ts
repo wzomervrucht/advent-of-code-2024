@@ -17,6 +17,7 @@ function solve2(input: string[]) {
 }
 
 function parseMachines(input: string[], offset = 0) {
+  assert(input.length % 4 === 3);
   return array((input.length + 1) / 4, i => {
     const lines = input.slice(4 * i, 4 * i + 4);
     return parseMachine(lines, offset);
@@ -24,9 +25,9 @@ function parseMachines(input: string[], offset = 0) {
 }
 
 function parseMachine(lines: string[], offset: number) {
-  const matchA = lines[0]?.match(/^Button A: X\+(?<x>\d+), Y\+(?<y>\d+)$/);
-  const matchB = lines[1]?.match(/^Button B: X\+(?<x>\d+), Y\+(?<y>\d+)$/);
-  const matchPrize = lines[2]?.match(/^Prize: X=(?<x>\d+), Y=(?<y>\d+)$/);
+  const matchA = lines[0]!.match(/^Button A: X\+(?<x>\d+), Y\+(?<y>\d+)$/);
+  const matchB = lines[1]!.match(/^Button B: X\+(?<x>\d+), Y\+(?<y>\d+)$/);
+  const matchPrize = lines[2]!.match(/^Prize: X=(?<x>\d+), Y=(?<y>\d+)$/);
   assert(matchA && matchB && matchPrize && !lines[3]);
   const groupsA = matchA.groups as { x: string; y: string };
   const groupsB = matchB.groups as { x: string; y: string };

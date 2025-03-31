@@ -3,7 +3,8 @@ import { sum } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
-  return sum(input.flatMap(getProducts));
+  const products = input.flatMap(getProducts);
+  return sum(products);
 }
 
 function solve2(input: string[]) {

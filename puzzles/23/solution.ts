@@ -16,7 +16,7 @@ function solve2(input: string[]) {
   const connections = getConnections(input);
   const computers = [...connections.keys()];
   const cliques = getMaximalCliques([], computers, [], connections);
-  const largest = max(cliques, c => c.length)!;
+  const largest = max(cliques, clique => clique.length)!;
   return largest.sort().join();
 }
 
@@ -60,12 +60,12 @@ function getMaximalCliques(
   const cliques: string[][] = [];
   while (possible.length) {
     const a = possible.pop()!;
-    const c = connections.get(a)!;
+    const connected = connections.get(a)!;
     cliques.push(
       ...getMaximalCliques(
         required.concat([a]),
-        possible.filter(p => c.has(p)),
-        excluded.filter(x => c.has(x)),
+        possible.filter(p => connected.has(p)),
+        excluded.filter(x => connected.has(x)),
         connections
       )
     );

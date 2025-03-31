@@ -24,16 +24,16 @@ function parseMap(input: string[]) {
 
 function getRegions(map: Grid<string>) {
   const regions: Point[][] = [];
-  const plotted = map.map(() => false);
+  const visited = map.map(() => false);
   map.forEach((plant, point) => {
-    if (!plotted.get(point)) {
-      plotted.set(point, true);
+    if (!visited.get(point)) {
+      visited.set(point, true);
       const region = [point];
       const queue = [point];
       while (queue.length) {
         const p = queue.pop()!;
-        const next = neighbors(p).filter(q => !plotted.get(q) && map.get(q) === plant);
-        next.forEach(q => plotted.set(q, true));
+        const next = neighbors(p).filter(q => !visited.get(q) && map.get(q) === plant);
+        next.forEach(q => visited.set(q, true));
         region.push(...next);
         queue.push(...next);
       }

@@ -29,7 +29,7 @@ function getCode(line: string) {
   return { code: line, number: parseInt(line.slice(0, 3)) };
 }
 
-function getComplexity(code: Code, counts: PairMap<number>) {
+function getComplexity(code: Code, counts: KeyPairMap<number>) {
   const length = getCountForKeys(code.code, counts);
   return length * code.number;
 }
@@ -37,16 +37,19 @@ function getComplexity(code: Code, counts: PairMap<number>) {
 function getNumPadCounts(robots: number) {
   const dirPaths = getDirKeyPairMap(getDirectionalPaths);
   const numPaths = getNumKeyPairMap(getNumericalPaths);
-  let dirCounts = getDirKeyPairMap(() => 1);
+  // for manual entry
+  let counts = getDirKeyPairMap(() => 1);
+  // for the robot-operated directional keypads
   for (let n = 0; n < robots; n++) {
-    dirCounts = getDirKeyPairMap(pair => getCount(pair, dirPaths, dirCounts));
+    counts = getDirKeyPairMap(pair => getCount(pair, dirPaths, counts));
   }
-  return getNumKeyPairMap(pair => getCount(pair, numPaths, dirCounts));
+  // for the robot-operated numerical keypad
+  return getNumKeyPairMap(pair => getCount(pair, numPaths, counts));
 }
 
-function getDirectionalPaths(pair: Pair) {
-  const p = directional.get(pair.a)!;
-  const q = directional.get(pair.b)!;
+function getDirectionalPaths(pair: KeyPair) {
+  const p = dirPad.get(pair.a)!;
+  const q = dirPad.get(pair.b)!;
   const d = { x: q.x - p.x, y: q.y - p.y };
   const a = { x: Math.abs(d.x), y: Math.abs(d.y) };
   const v = d.x >= 0 ? 'v' : '^';
@@ -63,9 +66,9 @@ function getDirectionalPaths(pair: Pair) {
   assert.fail();
 }
 
-function getNumericalPaths(pair: Pair) {
-  const p = numerical.get(pair.a)!;
-  const q = numerical.get(pair.b)!;
+function getNumericalPaths(pair: KeyPair) {
+  const p = numPad.get(pair.a)!;
+  const q = numPad.get(pair.b)!;
   const d = { x: q.x - p.x, y: q.y - p.y };
   const a = { x: Math.abs(d.x), y: Math.abs(d.y) };
   const v = d.x >= 0 ? 'v' : '^';
@@ -90,13 +93,13 @@ function getNumericalPaths(pair: Pair) {
   assert.fail();
 }
 
-function getCount(pair: Pair, paths: PairMap<string[]>, costs: PairMap<number>) {
+function getCount(pair: KeyPair, paths: KeyPairMap<string[]>, costs: KeyPairMap<number>) {
   const options = paths.get(pair)!;
   const counts = options.map(keys => getCountForKeys(keys, costs));
   return Math.min(...counts);
 }
 
-function getCountForKeys(keys: string, costs: PairMap<number>) {
+function getCountForKeys(keys: string, costs: KeyPairMap<number>) {
   let count = 0;
   let a = 'A';
   for (const b of keys) {
@@ -106,23 +109,26 @@ function getCountForKeys(keys: string, costs: PairMap<number>) {
   return count;
 }
 
-function getDirKeyPairMap<T>(callback: (pair: Pair) => T) {
-  return new PairMap(getPairMapEntries(directional, callback));
+function getDirKeyPairMap<T>(callback: (pair: KeyPair) => T) {
+  return new KeyPairMap(getKeyPairMapEntries(dirKeys, callback));
 }
 
-function getNumKeyPairMap<T>(callback: (pair: Pair) => T) {
-  return new PairMap(getPairMapEntries(numerical, callback));
+function getNumKeyPairMap<T>(callback: (pair: KeyPair) => T) {
+  return new KeyPairMap(getKeyPairMapEntries(numKeys, callback));
 }
 
-function* getPairMapEntries<T>(map: Map<string, Point>, callback: (pair: Pair) => T) {
-  for (const a of map.keys()) {
-    for (const b of map.keys()) {
-      yield [{ a, b }, callback({ a, b })] as [Pair, T];
+function* getKeyPairMapEntries<T>(keys: string[], callback: (pair: KeyPair) => T) {
+  for (const a of keys) {
+    for (const b of keys) {
+      yield [{ a, b }, callback({ a, b })] as [KeyPair, T];
     }
   }
 }
 
-const directional = new Map<string, Point>([
+const dirKeys = ['A', '^', '<', 'v', '>'];
+const numKeys = ['A', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+const dirPad = new Map<string, Point>([
   ['A', { x: 0, y: 2 }],
   ['^', { x: 0, y: 1 }],
   ['<', { x: 1, y: 0 }],
@@ -130,7 +136,7 @@ const directional = new Map<string, Point>([
   ['>', { x: 1, y: 2 }]
 ]);
 
-const numerical = new Map<string, Point>([
+const numPad = new Map<string, Point>([
   ['A', { x: 3, y: 2 }],
   ['0', { x: 3, y: 1 }],
   ['1', { x: 2, y: 0 }],
@@ -149,14 +155,14 @@ interface Code {
   number: number;
 }
 
-interface Pair {
+interface KeyPair {
   a: string;
   b: string;
 }
 
-class PairMap<T> extends HashMap<Pair, T> {
-  protected hash({ a: from, b: to }: Pair) {
-    return `${from},${to}`;
+class KeyPairMap<T> extends HashMap<KeyPair, T> {
+  protected hash({ a, b }: KeyPair) {
+    return `${a},${b}`;
   }
 }
 

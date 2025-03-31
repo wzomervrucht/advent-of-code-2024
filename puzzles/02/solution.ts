@@ -11,13 +11,17 @@ function solve1(input: string[]) {
 
 function solve2(input: string[]) {
   const reports = input.map(parseReport);
-  const safeReports = reports.filter(report => report.some((_, i) => isSafe(report.toSpliced(i, 1))));
+  const safeReports = reports.filter(isSafeAfterDamping);
   return safeReports.length;
 }
 
 function parseReport(line: string) {
   assert(line.match(/^\d+(?: \d+)*$/));
   return parseIntegers(line);
+}
+
+function isSafeAfterDamping(report: number[]) {
+  return report.some((_, i) => isSafe(report.toSpliced(i, 1)));
 }
 
 function isSafe(report: number[]) {
