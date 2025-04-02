@@ -6,26 +6,20 @@ import { sum } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
-  const { map, robot, moves } = parseInput(input);
-  let position = robot;
-  for (const direction of moves) {
-    position = move(map, position, direction);
-  }
+  const { map, robot, moves } = parseInput(input, false);
+  moveRobot(map, robot, moves);
   const boxes = getBoxes(map);
   return sum(boxes.map(getCoordinate));
 }
 
 function solve2(input: string[]) {
   const { map, robot, moves } = parseInput(input, true);
-  let position = robot;
-  for (const direction of moves) {
-    position = move(map, position, direction);
-  }
+  moveRobot(map, robot, moves);
   const boxes = getBoxes(map);
   return sum(boxes.map(getCoordinate));
 }
 
-function parseInput(input: string[], expand = false) {
+function parseInput(input: string[], expand: boolean) {
   const blank = input.indexOf('');
   assert(blank >= 0);
   return {
@@ -62,28 +56,33 @@ function getMoves(lines: string[]) {
   return lines.join('') as Iterable<Direction>;
 }
 
+function moveRobot(map: Grid<string>, robot: Point, moves: Iterable<Direction>) {
+  let position = robot;
+  for (const direction of moves) {
+    position = move(map, position, direction);
+  }
+}
+
 function move(map: Grid<string>, robot: Point, direction: Direction) {
-  const moving: Position[][] = [];
-  let step = [{ ...robot, direction }];
-  while (step.length) {
-    moving.push(step);
-    step = step.map(forward).filter(p => map.get(p) !== '.');
-    if (step.some(p => map.get(p) === '#')) {
+  const moving: Position[] = [];
+  let next = [{ ...robot, direction }];
+  while (next.length) {
+    moving.push(...next);
+    next = next.map(forward).filter(p => map.get(p) !== '.');
+    if (next.some(p => map.get(p) === '#')) {
       return robot;
     }
     if (['^', 'v'].includes(direction)) {
-      [...step].forEach(p => {
-        map.get(p) === '[' && step.every(q => q.y !== p.y + 1) && step.push({ ...p, y: p.y + 1 });
-        map.get(p) === ']' && step.every(q => q.y !== p.y - 1) && step.push({ ...p, y: p.y - 1 });
+      [...next].forEach(p => {
+        map.get(p) === '[' && next.every(q => q.y !== p.y + 1) && next.push({ ...p, y: p.y + 1 });
+        map.get(p) === ']' && next.every(q => q.y !== p.y - 1) && next.push({ ...p, y: p.y - 1 });
       });
     }
   }
-  moving.reverse().forEach(s =>
-    s.forEach(p => {
-      map.set(forward(p), map.get(p)!);
-      map.set(p, '.');
-    })
-  );
+  moving.reverse().forEach(p => {
+    map.set(forward(p), map.get(p)!);
+    map.set(p, '.');
+  });
   return forward({ ...robot, direction });
 }
 
