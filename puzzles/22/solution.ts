@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { assert } from '../common/assert.ts';
-import { array, range, sum } from '../common/util.ts';
+import { range, sum } from '../common/util.ts';
 import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
@@ -11,19 +11,14 @@ function solve1(input: string[]) {
 
 function solve2(input: string[]) {
   const secrets = input.map(parseSecret);
-  const priceLists = secrets.map(getPriceList);
-  const priceByChanges = new Map<string, number>();
-  priceLists.forEach(prices => {
-    const occured = new Set<string>();
-    for (let i = 4; i < prices.length; i++) {
-      const changes = array(4, j => prices[i + j - 3]! - prices[i + j - 4]!).join();
-      if (!occured.has(changes)) {
-        occured.add(changes);
-        priceByChanges.set(changes, (priceByChanges.get(changes) ?? 0) + prices[i]!);
-      }
-    }
+  const prices = secrets.map(getPriceByChanges);
+  const totals = new Map<string, number>();
+  prices.forEach(priceByChanges => {
+    priceByChanges.forEach((price, changes) => {
+      totals.set(changes, (totals.get(changes) ?? 0) + price);
+    });
   });
-  return Math.max(...priceByChanges.values());
+  return Math.max(...totals.values());
 }
 
 function parseSecret(line: string) {
@@ -35,12 +30,22 @@ function getFinalSecret(initial: number) {
   return range(2000).reduce(getNextSecret, initial);
 }
 
-function getPriceList(initial: number) {
-  let secret: number;
-  return array(2001, i => {
-    secret = i ? getNextSecret(secret) : initial;
-    return secret % 10;
-  });
+function getPriceByChanges(initial: number) {
+  const priceByChanges = new Map<string, number>();
+  let secret = initial;
+  let price = initial % 10;
+  // eslint-disable-next-line no-useless-assignment
+  let [d1, d2, d3, d4] = [0, 0, 0, 0];
+  for (let i = 0; i < 2000; i++) {
+    secret = getNextSecret(secret);
+    [d1, d2, d3, d4] = [d2, d3, d4, (secret % 10) - price];
+    price = secret % 10;
+    if (i >= 4) {
+      const changes = `${d1},${d2},${d3},${d4}`;
+      priceByChanges.has(changes) || priceByChanges.set(changes, price);
+    }
+  }
+  return priceByChanges;
 }
 
 function getNextSecret(secret: number) {
