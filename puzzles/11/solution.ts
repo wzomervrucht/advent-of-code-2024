@@ -6,14 +6,14 @@ import type { Puzzle } from '../puzzle.ts';
 
 function solve1(input: string[]) {
   const numbers = parseNumbers(input);
-  const record = new StoneMap<number>();
+  const record = new StoneStateMap<number>();
   const counts = numbers.map(number => countStones(number, 25, record));
   return sum(counts);
 }
 
 function solve2(input: string[]) {
   const numbers = parseNumbers(input);
-  const record = new StoneMap<number>();
+  const record = new StoneStateMap<number>();
   const counts = numbers.map(number => countStones(number, 75, record));
   return sum(counts);
 }
@@ -24,7 +24,7 @@ function parseNumbers(input: string[]) {
   return parseIntegers(input[0]!);
 }
 
-function countStones(number: number, blinks: number, record: StoneMap<number>) {
+function countStones(number: number, blinks: number, record: StoneStateMap<number>) {
   if (record.has({ number, blinks })) {
     return record.get({ number, blinks })!;
   }
@@ -47,13 +47,13 @@ function countStones(number: number, blinks: number, record: StoneMap<number>) {
   return count;
 }
 
-interface Stone {
+interface StoneState {
   number: number;
   blinks: number;
 }
 
-class StoneMap<T> extends HashMap<Stone, T> {
-  protected hash({ number, blinks }: Stone) {
+class StoneStateMap<T> extends HashMap<StoneState, T> {
+  protected hash({ number, blinks }: StoneState) {
     return `${number},${blinks}`;
   }
 }

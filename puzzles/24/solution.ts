@@ -6,11 +6,12 @@ function solve1(input: string[]) {
   const { inputs, gates, z } = parseWires(input);
   const wires = new Map([...inputs, ...gates].map(wire => [wire.wire, wire]));
   const output = z.map(wire => getValue(wire, wires));
-  return decimal(output);
+  return number(output);
 }
 
 function solve2(input: string[]) {
   const { gates, x, y, z } = parseWires(input);
+  assert(x.length);
   assert(y.length === x.length);
   assert(z.length === x.length + 1);
   const swaps = findSwaps(gates, x, y, z);
@@ -61,26 +62,19 @@ function getValue(name: string, wires: Map<string, Wire>): boolean {
   return wire.value;
 }
 
-function decimal(bits: boolean[]) {
+function number(bits: boolean[]) {
   return bits.reduceRight((n, bit) => 2 * n + Number(bit), 0);
 }
 
 function findSwaps(gates: Gate[], x: string[], y: string[], z: string[]) {
-  // swaps found by manual inspection of the input assuming a construction
-  // where for each bit n, the system should have these inputs and gates:
-  // x(n)
-  // y(n)
-  // and(n) =   x(n) AND   y(n)
-  // xor(n) =   x(n) XOR   y(n)
-  // ofx(n) = xor(n) AND ofl(n-1)
-  // z(n)   = xor(n) XOR ofl(n-1)
-  // ofl(n) = and(n)  OR ofx(n)
+  // found by manual inspection of the input
   const swaps: [string, string][] = [
     ['z10', 'mkk'],
     ['z14', 'qbw'],
     ['cvp', 'wjb'],
     ['z34', 'wcb']
   ];
+  // swap wires and check that the resulting system is correct
   swaps.forEach(([a, b]) => {
     const gateA = gates.find(gate => gate.wire === a);
     const gateB = gates.find(gate => gate.wire === b);
@@ -93,6 +87,15 @@ function findSwaps(gates: Gate[], x: string[], y: string[], z: string[]) {
 }
 
 function checkGates(gates: Gate[], x: string[], y: string[], z: string[]) {
+  // check that the gates are wired correctly assuming a construction
+  // where for each bit n, the system should have these inputs and gates:
+  // x(n)
+  // y(n)
+  // and(n) =   x(n) AND   y(n)
+  // xor(n) =   x(n) XOR   y(n)
+  // ofx(n) = xor(n) AND ofl(n-1)
+  // z(n)   = xor(n) XOR ofl(n-1)
+  // ofl(n) = and(n)  OR ofx(n)
   const and0 = gates.find(gate => gate.op === 'AND' && hasInputs(gate, x[0]!, y[0]!));
   const xor0 = gates.find(gate => gate.op === 'XOR' && hasInputs(gate, x[0]!, y[0]!));
   assume(and0 && xor0 && xor0.wire === z[0]);

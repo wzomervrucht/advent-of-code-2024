@@ -23,11 +23,7 @@ function solve2(input: string[]) {
 function parseMap(input: string[]) {
   assert(input.every(line => line.length === input[0]!.length));
   assert(input.every(line => line.match(/^\d*$/)));
-  const size = {
-    x: input.length,
-    y: input[0]?.length ?? 0
-  };
-  return new Grid<Square>(size, (x, y) => ({ height: parseInt(input[x]![y]!) }));
+  return Grid.from(input).map(n => ({ height: parseInt(n) }));
 }
 
 function getTrailheads(map: Grid<Square>) {

@@ -7,7 +7,9 @@ function solve1(input: string[]) {
   let checksum = 0;
   let file = files.at(-1);
   while (file) {
-    gaps.length && gaps.at(-1)!.start >= file.start && gaps.pop();
+    if (gaps.length && gaps.at(-1)!.start >= file.start) {
+      gaps.pop();
+    }
     const gap = gaps[0];
     const size = Math.min(file.size, (gap ?? file).size);
     checksum += getChecksum(files.length - 1, (gap ?? file).start, size);
@@ -54,6 +56,7 @@ function parseDiskMap(input: string[]) {
 }
 
 function getChecksum(id: number, start: number, size: number) {
+  // id * start + id * (start + 1) + ... + id * (start + size - 1)
   return (id * size * (2 * start + size - 1)) / 2;
 }
 
